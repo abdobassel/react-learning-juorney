@@ -1,4 +1,4 @@
-export function Card(props) {
+export default function Card(props) {
     return (
         <div style={{ width: "300px" }}>
             <div style={{

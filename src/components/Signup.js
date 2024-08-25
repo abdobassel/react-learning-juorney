@@ -24,15 +24,20 @@ export default function Signup() {
             return false;
         }
         return true;
+        // لو اي خطا حصل اللي هيرجع هيكون false 
+        // فعشان كده احنا بنرجع في الاخر return true 
+        // يعني لو رجع ترو اذن الفاليديشن تمام 
     };
 
+
     function submit(e) {
-        e.preventDefault();
+        e.preventDefault(); // لمنع ارسال البيانات غير بعد الفاليديشن
 
-        if (!validateForm()) return;
+        if (!validateForm()) return; // لو رجع الفولس يبقى لازم نوقف الفانكشن
 
-        setLoading(true);
-        setError("");
+
+        setLoading(true); // تحت الزرار هيتغير التكست فيه 
+        setError(""); //  هيتملي في حالة ان في ايرور
         setSuccess("");
 
         axios.post('http://127.0.0.1:8000/api/auth/register', {
@@ -41,10 +46,12 @@ export default function Signup() {
             phone: phone,
             password: pass,
             codeType: "email"
+            // الباك اند انا اللي عامله من  مشروع بلارافيل 
         })
             .then((response) => {
+                // هنغير الحلة بتاع لودينج لفولس عشان الزرار يرجع لاصله طالما العملية تمت سواء نجاح او فشل
                 setLoading(false);
-                setSuccess("Signup successful! Please check your email.");
+                setSuccess("Signup successful! Please check your email."); // ملينا الsuccess
                 // Optionally, you could redirect the user or clear the form here
             })
             .catch((error) => {
@@ -55,52 +62,59 @@ export default function Signup() {
     }
 
     return (
-        <div className="mb-3 row">
-            <h1 className="text-center">SignUp</h1>
-            <form className="form-control" onSubmit={submit}>
-                <input
-                    className="form-control form-control-lg"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    name="name"
-                    type="text"
-                    placeholder="UserName"
-                    aria-label=".form-control-lg example"
-                />
-                <input
-                    className="form-control form-control-lg"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    name="phone"
-                    type="text"
-                    placeholder="Phone Number"
-                    aria-label=".form-control-lg example"
-                />
-                <input
-                    className="form-control form-control-lg"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    aria-label=".form-control-lg example"
-                />
-                <input
-                    className="form-control form-control-lg"
-                    value={pass}
-                    onChange={(e) => setPass(e.target.value)}
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    aria-label=".form-control-lg example"
-                />
-                <br />
-                <button className='btn btn-primary' type="submit" disabled={loading}>
-                    {loading ? "Signing up..." : "Signup"}
-                </button>
-                {error && <p className="text-danger">{error}</p>}
-                {success && <p className="text-success">{success}</p>}
-            </form>
+        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+            <div className="col-md-6 col-lg-4">
+                <h1 className="text-center mb-4">SignUp</h1>
+                <form className="form-control" onSubmit={submit}>
+                    {error && <p className="text-danger">{error}</p>}
+                    {success && <p className="text-success">{success}</p>}
+                    <div className="mb-3">
+                        <input
+                            className="form-control form-control-lg"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            name="name"
+                            type="text"
+                            placeholder="UserName"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <input
+                            className="form-control form-control-lg"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            name="phone"
+                            type="text"
+                            placeholder="Phone Number"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <input
+                            className="form-control form-control-lg"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <input
+                            className="form-control form-control-lg"
+                            value={pass}
+                            onChange={(e) => setPass(e.target.value)}
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <button className="btn btn-primary w-100" type="submit" disabled={loading}>
+                        {loading ? "Signing up..." : "Signup"}
+                    </button>
+                    {error && <p className="text-danger">{error}</p>}
+                    {success && <p className="text-success">{success}</p>}
+                </form>
+            </div>
         </div>
     );
 }
