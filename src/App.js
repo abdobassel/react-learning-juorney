@@ -1,20 +1,21 @@
-import logo from './palestine-flag-protest.webp';
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+
 import { data } from './components/Data';
 import { Card } from './components/Card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [name, setChangename] = useState(true);
-  console.log(name);
-  function toggle() {
-    setChangename((v) => !v);
+  const [dataNames, setData] = useState([]);
 
-  }
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setlastname] = useState("");
+  const nameshow = dataNames.map((n) => <Name key={n.id} name={n.name}></Name>)
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes").then(response => response.json()).then((data) => data.data.memes)
+      .then((memes) => {
+        const names = memes.map((name) => name);
+
+        setData(names);
+      });
+  });
 
 
   const dataList = data.map((card) =>
@@ -23,32 +24,38 @@ function App() {
   return (
     <div className='App'>
       <div className='container'>
-        <div onClick={toggle} style={{ display: "flex", marginLeft: "20px", alignItems: "center", gap: "10px", justifyContent: "center" }}>  {dataList}
+        <div style={{
+          display: "flex",
+          marginLeft: "20px",
+          alignItems: "center",
+          gap: "10px", justifyContent: "center"
+        }}>
+          {dataList}
         </div>
-      </div>
-      {name ? "True" : "False"}
-      <form action=''>
-        <label htmlFor='' >Firrst name</label>
-        <input
-          value={
-            firstname
-          }
-          onChange={(e) => setFirstname(e.target.value)}
-        ></input>
-        <br></br>
-        <label htmlFor='' >Last name</label>
-        <input
-          value={
-            lastname
-          }
-          onChange={(e) => setlastname(e.target.value)}
-        ></input>
 
-      </form>
+      </div>
+      <div style={{
+
+        alignItems: "center",
+        color: "red",
+
+
+      }}>
+        {nameshow}
+      </div>
+
     </div>
   );
 
 
+}
+
+function Name(props) {
+  return (
+    <div>
+      <p>{props.name}</p>
+    </div>
+  );
 }
 
 export default App;
