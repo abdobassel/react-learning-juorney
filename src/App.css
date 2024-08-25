@@ -15,19 +15,37 @@
 */
 .App-header {
   background-color: #49556e;
-  min-height: 80vh;
+  min-height: 80px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
+  border-bottom: 1px solid #dee2e6;
+  /* Border at the bottom */
+
   color: white;
 }
 
-/* .container {
-  margin: auto 0;
 
-} */
+.logo {
+  /* Add any specific styling for your logo here */
+}
+
+.nav-links {
+  /* Flexbox styling for the links */
+  display: flex;
+  gap: 15px;
+  /* Space between the links */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #007bff;
+  /* Bootstrap primary color */
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
 
 .App-link {
   color: #61dafb;

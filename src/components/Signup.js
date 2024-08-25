@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { data } from "./Data";
 
 export default function Signup() {
     const [name, setName] = useState("");
@@ -9,6 +10,9 @@ export default function Signup() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [dataResponse, setResponseData] = useState([]);
+
+    console.log(dataResponse);
 
     const validateForm = () => {
         if (!name || !email || !phone || !pass) {
@@ -51,6 +55,9 @@ export default function Signup() {
             .then((response) => {
                 // هنغير الحلة بتاع لودينج لفولس عشان الزرار يرجع لاصله طالما العملية تمت سواء نجاح او فشل
                 setLoading(false);
+                console.log(response.data);
+                setResponseData(response.data);
+
                 setSuccess("Signup successful! Please check your email."); // ملينا الsuccess
                 // Optionally, you could redirect the user or clear the form here
             })

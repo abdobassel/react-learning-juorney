@@ -1,21 +1,17 @@
+import { Link } from "react-router-dom";
 import { Logo } from "./logo";
 
 export default function Header() {
     return (
         <header className="App-header">
+            {/* Logo on the left */}
 
-            <Logo></Logo>
-            <p>
-                Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
+
+            {/* Navigation links on the right */}
+            <nav className="nav-links">
+                <Link to="/register" className="nav-link">Register</Link>
+                <Link to="/login" className="nav-link">Login</Link>
+            </nav>
         </header>
     );
 }
