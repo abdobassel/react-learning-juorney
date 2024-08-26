@@ -1,16 +1,37 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";
+import axios from "axios";
 
 export default function Header() {
+    function logout() {
+        const token = window.localStorage.getItem('token');
+
+        if (token) {
+            axios.post('http://127.0.0.1:8000/api/auth/logout', {
+                token: token,
+            }).then((res) => {
+                console.log(res);
+                window.localStorage.removeItem('email');
+                window.localStorage.removeItem('token');
+                window.location.pathname = '/';
+            });
+        }
+    }
     return (
         <header className="App-header">
             {/* Logo on the left */}
 
 
-            {/* Navigation links on the right */}
+
+
             <nav className="nav-links">
-                <Link to="/register" className="nav-link">Register</Link>
-                <Link to="/login" className="nav-link">Login</Link>
+                {/*   هنا بشوف لو فيه اميل متسجل او لا لو فيه يظهر فقط اللوج اوت */}
+                {!window.localStorage.getItem('email') ? <>
+                    <Link to="/register" className="nav-button" >Register</Link>
+                    <Link to="/login" className="nav-button">Login</Link>
+                </> :
+                    <Link to="/logout" className="nav-button" onClick={logout}>Logout</Link>
+                }
             </nav>
         </header>
     );

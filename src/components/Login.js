@@ -8,6 +8,7 @@ export default function Login() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
+
     const validateForm = () => {
         if (!email || !pass) {
             setError("Please fill in all fields");
@@ -39,8 +40,19 @@ export default function Login() {
         })
             .then((response) => {
                 setLoading(false);
-                console.log(response.data);
+
                 setSuccess("Login successful!");
+                if (response.status === 200) {
+                    window.localStorage.setItem('email', email);
+
+                    console.log(response.data.result.token.access_token);
+                    console.log(response.data.result);
+                    const token = response.data.result.token.access_token;
+
+                    window.localStorage.setItem('token', token);
+                    window.location.pathname = "/";
+                }
+
                 // Optionally, you could redirect the user or clear the form here
             })
             .catch((error) => {

@@ -13,6 +13,7 @@ export default function Cards() {
         <div style={{
             display: "flex",
             marginLeft: "20px",
+            marginTop: "30px",
             alignItems: "center",
             gap: "10px", justifyContent: "center"
         }}>

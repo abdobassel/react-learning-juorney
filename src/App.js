@@ -17,6 +17,8 @@ function App() {
       <Header></Header>
       <div className='container'>
         <Routes>
+          <Route path='/' element={<Cards></Cards>}></Route>
+          <Route path='/logout' element={<Cards></Cards>}></Route>
           <Route path='/register' element={<Signup></Signup>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>
         </Routes>
