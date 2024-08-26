@@ -7,14 +7,19 @@ export default function Header() {
         const token = window.localStorage.getItem('token');
 
         if (token) {
-            axios.post('http://127.0.0.1:8000/api/auth/logout', {
-                token: token,
-            }).then((res) => {
-                console.log(res);
-                window.localStorage.removeItem('email');
-                window.localStorage.removeItem('token');
-                window.location.pathname = '/';
-            });
+            axios.post('http://127.0.0.1:8000/api/auth/logout', {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    // توجيه المستخدم إلى صفحة تسجيل الدخول
+                    window.location.pathname = '/login';
+                    window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('token');
+
+                });
         }
     }
     return (

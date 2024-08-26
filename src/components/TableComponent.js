@@ -1,7 +1,6 @@
 // src/components/UsersTable.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-// بيانات افتراضية
 const usersData = [
     { id: 1, name: "John Doe", email: "john@example.com" },
     { id: 2, name: "Jane Smith", email: "jane@example.com" },
@@ -19,6 +18,7 @@ function handleDelete(id) {
 }
 
 function UsersTable() {
+
     return (
         <div className="container mt-4">
             <h1 className="text-center mb-4">Users List</h1>
