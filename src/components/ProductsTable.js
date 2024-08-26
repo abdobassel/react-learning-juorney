@@ -1,52 +1,52 @@
-// src/components/UsersTable.js
+// src/components/ProductsTable.js
 import React from 'react';
 
-// بيانات افتراضية
-const usersData = [
-    { id: 1, name: "John Doe", email: "john@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com" },
-    { id: 3, name: "Alice Johnson", email: "alice@example.com" }
+// بيانات افتراضية للمنتجات
+const productsData = [
+    { id: 1, name: "Product A", price: "$10" },
+    { id: 2, name: "Product B", price: "$20" },
+    { id: 3, name: "Product C", price: "$30" }
 ];
 
 function handleEdit(id) {
     // منطق التعديل هنا
-    console.log("Edit user with ID:", id);
+    console.log("Edit product with ID:", id);
 }
 
 function handleDelete(id) {
     // منطق الحذف هنا
-    console.log("Delete user with ID:", id);
+    console.log("Delete product with ID:", id);
 }
 
-function UsersTable() {
+function ProductsTable() {
     return (
         <div className="container mt-4">
-            <h1 className="text-center mb-4">Users List</h1>
+            <h1 className="text-center mb-4">Products List</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Price</th>
                         <th>Actions</th> {/* عمود الأفعال */}
                     </tr>
                 </thead>
                 <tbody>
-                    {usersData.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
+                    {productsData.map(product => (
+                        <tr key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.name}</td>
+                            <td>{product.price}</td>
                             <td>
                                 <button
                                     className="btn btn-warning btn-sm me-2"
-                                    onClick={() => handleEdit(user.id)}
+                                    onClick={() => handleEdit(product.id)}
                                 >
                                     Edit
                                 </button>
                                 <button
                                     className="btn btn-danger btn-sm"
-                                    onClick={() => handleDelete(user.id)}
+                                    onClick={() => handleDelete(product.id)}
                                 >
                                     Delete
                                 </button>
@@ -59,4 +59,4 @@ function UsersTable() {
     );
 }
 
-export default UsersTable;
+export default ProductsTable;

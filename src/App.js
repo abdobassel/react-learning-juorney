@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Cards from './components/Cards'; // استخدم الاستيراد الافتراضي
+import Cards from './components/Cards';
 import Header from './components/Header';
 
 import Signup from './components/Signup';
@@ -29,7 +29,7 @@ function App() {
           <Route path='/register' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/dashboard/*' element={<Dashboard></Dashboard>}>
-
+            { /*    inside Route in Dashboard   */}
             <Route path="users" element={<Users />} />
             <Route path="products" element={<Products />} />
           </Route>  {/* Add the Dashboard route */}

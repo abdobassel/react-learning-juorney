@@ -1,3 +1,5 @@
+import ProductsTable from "./ProductsTable";
+
 export default function Products() {
 
     // use effect => fetch data 
@@ -7,6 +9,8 @@ export default function Products() {
     // product id - index -name - delete - update - show
 
     return (
-        <div></div>
+        <div>
+            <ProductsTable></ProductsTable>
+        </div>
     );
 }

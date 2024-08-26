@@ -1,3 +1,5 @@
+import UsersTable from "./TableComponent";
+
 export default function Users() {
 
     // use effect => fetch data 
@@ -8,7 +10,9 @@ export default function Users() {
 
     return (
         <div>
-            <h1>Users</h1>
+
+
+            <UsersTable></UsersTable>
         </div>
     );
 }
