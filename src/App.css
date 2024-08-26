@@ -30,21 +30,37 @@
   /* Add any specific styling for your logo here */
 }
 
-.nav-links {
-  /* Flexbox styling for the links */
-  display: flex;
-  gap: 15px;
-  /* Space between the links */
-}
-
 .nav-link {
   text-decoration: none;
-  color: #007bff;
-  /* Bootstrap primary color */
+  color: #fff;
+  margin-right: 15px;
+
+  padding: 8px 16px;
+  background-color: #007bff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.nav-link.active {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.dashboard-header {
+  background-color: #343a40;
+}
+
+.website-link .nav-link {
+  background-color: #28a745;
+}
+
+.website-link .nav-link:hover {
+  background-color: #218838;
 }
 
 .App-link {
@@ -54,6 +70,7 @@
 .nav-button {
   display: inline-block;
   margin-top: 20px;
+  margin-left: 10px;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
@@ -82,6 +99,41 @@
   /* Reset zoom effect when button is clicked */
 }
 
+/* src/components/Dashboard.css */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #343a40;
+  padding: 15px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 20px;
+}
 
 
 @keyframes App-logo-spin {
