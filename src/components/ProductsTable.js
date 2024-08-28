@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 // بيانات افتراضية للمنتجات
@@ -43,12 +44,14 @@ function ProductsTable() {
         <td>{product.name_en}</td>
         <td>{product.price}</td>
         <td>
-            <button
-                className="btn btn-warning btn-sm me-2"
-                onClick={() => handleEdit(product.id)}
-            >
-                Edit
-            </button>
+            <Link to={`${product.id}`}>
+                <button
+                    className="btn btn-warning btn-sm me-2"
+                    onClick={() => handleEdit(product.id)}
+                >
+                    Edit
+                </button>
+            </Link>
             <button
                 className="btn btn-danger btn-sm"
                 onClick={() => handleDelete(product.id)}
@@ -58,8 +61,8 @@ function ProductsTable() {
         </td>
     </tr>);
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/products').then((response) => response.json()).
-            then((data) => setProductsData(data.result));
+        fetch('http://127.0.0.1:8000/api/products').then((response) => response.json())
+            .then((data) => setProductsData(data.result));
     });
 
     return (

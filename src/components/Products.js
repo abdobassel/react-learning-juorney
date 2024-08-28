@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import ProductsTable from "./ProductsTable";
 
 export default function Products() {
@@ -10,7 +11,9 @@ export default function Products() {
 
     return (
         <div>
-            <ProductsTable></ProductsTable>
+            <ProductsTable>
+                <Outlet></Outlet>
+            </ProductsTable>
         </div>
     );
 }

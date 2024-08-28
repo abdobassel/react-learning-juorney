@@ -13,11 +13,13 @@ export default function Header() {
                 }
             })
                 .then((response) => {
-                    console.log(response);
-                    // توجيه المستخدم إلى صفحة تسجيل الدخول
                     window.location.pathname = '/login';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('token');
+                    console.log(response);
+                    // توجيه المستخدم إلى صفحة تسجيل الدخول
+
+
 
                 });
         }

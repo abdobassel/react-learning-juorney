@@ -11,6 +11,7 @@ import Dashboard from './Dashboard';
 import DashboardHeader from './components/DashHeader';
 import Products from './components/Products';
 import Users from './components/Users';
+import UpdateProduct from './components/UpdateProduct';
 
 
 function App() {
@@ -22,16 +23,18 @@ function App() {
       {!isDashboard && <Header />} {/* إظهار الهيدر العادي فقط في الصفحات التي ليست جزءًا من الداشبورد */}
       {isDashboard && <DashboardHeader />} {/* إظهار هيدر الداشبورد فقط في صفحات الداشبورد */}
 
+
       <div className={isDashboard ? '' : 'container'}>
         <Routes>
-          <Route path='/' element={<Cards />}></Route>
-          <Route path='/logout' element={<Cards></Cards>}></Route>
+          <Route path='' element={<Cards />}></Route>
           <Route path='/register' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/dashboard/*' element={<Dashboard></Dashboard>}>
             { /*    inside Route in Dashboard   */}
             <Route path="users" element={<Users />} />
             <Route path="products" element={<Products />} />
+            <Route path='products/:id' element={<UpdateProduct />}></Route>
+
           </Route>  {/* Add the Dashboard route */}
 
         </Routes>
