@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function UpdateProduct() {
@@ -19,22 +19,23 @@ export default function UpdateProduct() {
     const id = window.location.pathname.split("/").slice(-1)[0];
     console.log(id);
 
-    axios.post('http://127.0.0.1:8000/api/product/details', {
-        product_id: id
-    }).then((response) => {
-        console.log(response.data);
-        const productsRes = response.data;
-        if (productsRes.status) {
-            const productData = productsRes.result;
-            setNameen(productData.name.en);
-            setNamear(productData.name.ar);
-            setDescen(productData.description.en);
-            setDescar(productData.description.ar);
-            setPrice(productData.price);
-
-
-        }
-    });
+    useEffect(() => {
+        axios.post('http://127.0.0.1:8000/api/product/details', {
+            product_id: id
+        }).then((response) => {
+            const productsRes = response.data;
+            if (productsRes.status) {
+                const productData = productsRes.result;
+                setNameen(productData.name.en);
+                setNamear(productData.name.ar);
+                setDescen(productData.description.en);
+                setDescar(productData.description.ar);
+                setPrice(productData.price);
+            }
+        }).catch((error) => {
+            console.error("Error fetching product details:", error);
+        });
+    }, [id]);
     const validateForm = () => {
         if (!nameen || !namear || !descar || !descen || !price) {
             setError("Please fill in all fields");
