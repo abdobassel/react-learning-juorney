@@ -61,13 +61,24 @@ function ProductsTable() {
         </td>
     </tr>);
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/products').then((response) => response.json())
-            .then((data) => setProductsData(data.result));
-    });
+        fetch('http://127.0.0.1:8000/api/products')
+            .then((response) => response.json())
+            .then((data) => setProductsData(data.result))
+            .catch((error) => {
+                console.error("Error fetching products:", error);
+            });
+    }, []);
 
     return (
         <div className="container mt-4">
-            <h1 className="text-center mb-4">Products List</h1>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h1 className="text-center mb-4">Products List</h1>
+                <Link to="add">
+                    <button className="btn btn-primary">
+                        Add Product
+                    </button>
+                </Link>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>

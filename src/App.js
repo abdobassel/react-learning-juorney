@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Cards from './components/Cards';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import DashboardHeader from './components/DashHeader';
 import Products from './components/Products';
 import Users from './components/Users';
 import UpdateProduct from './components/UpdateProduct';
+import AddProduct from './components/AddProduct';
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="products" element={<Products />} />
             <Route path='products/:id' element={<UpdateProduct />}></Route>
+            <Route path='products/add' element={<AddProduct />}></Route>
+
 
           </Route>  {/* Add the Dashboard route */}
 
