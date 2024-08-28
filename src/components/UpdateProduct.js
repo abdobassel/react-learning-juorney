@@ -62,6 +62,10 @@ export default function UpdateProduct() {
             setError("Name must be at least 6 characters long");
             return false;
         }
+        if (descar.length < 6) { // التحقق من طول الوصف العربي
+            setError("Description AR must be at least 6 characters long");
+            return false;
+        }
         return true;
     };
 
@@ -76,9 +80,10 @@ export default function UpdateProduct() {
         const token = window.localStorage.getItem('token');
         axios.post('http://127.0.0.1:8000/api/product/update', {
             name_en: nameen,
+            name_ar: namear,
             desc_en: descen,
-            count: count,
             desc_ar: descar,
+            count: count,
             price: price,
             category_id: category, // Include category in the request
             product_id: `${id}`,
@@ -95,7 +100,9 @@ export default function UpdateProduct() {
             .catch((error) => {
                 setLoading(false);
                 setError("Update failed. Please try again.");
-                console.error(error);
+                if (error.response && error.response.data.errors) {
+                    console.error("Validation errors:", error.response.data.errors);
+                }
             });
     }
 
