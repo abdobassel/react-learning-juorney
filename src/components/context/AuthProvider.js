@@ -4,7 +4,7 @@ export const User = createContext({});
 
 // مزود السياق
 export default function AuthProvider({ children }) {
-    const [authToken, setAuthToken] = useState({});
+    const [authToken, setAuthToken] = useState(null); // استخدم null بدلاً من {}
     const [userModel, setUserModel] = useState({});
 
     return (
@@ -13,6 +13,7 @@ export default function AuthProvider({ children }) {
         </User.Provider>
     );
 }
+
 /*
 نستدعي الفانكشن او الكمبوننت فوق المثلا App> 
 لانها هنا الفانكششن بتريترن ال User.provider 

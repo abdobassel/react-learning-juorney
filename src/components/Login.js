@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import axios from "axios";
 import { User } from "./context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
@@ -9,8 +10,8 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const userModel = useContext(User);
-    console.log(userModel);
+    const { setAuthToken, setUserModel } = useContext(User);
+    const navigateTo = useNavigate();
     const validateForm = () => {
         if (!email || !pass) {
             setError("Please fill in all fields");
@@ -45,16 +46,14 @@ export default function Login() {
 
                 setSuccess("Login successful!");
                 if (response.status === 200) {
-                    window.localStorage.setItem('email', email);
 
-                    console.log(response.data.result.token.access_token);
-                    console.log(response.data.result);
+
                     const token = response.data.result.token.access_token;
+                    const userData = response.data.result;
+                    setUserModel(userData);
+                    setAuthToken(token);
+                    navigateTo('/dashboard');
 
-                    window.localStorage.setItem('token', token);
-                    //   window.location.pathname = "/";
-                    userModel.setUserModel(response.data.result);
-                    userModel.setAuthToken(response.data.result.token.access_token);
 
                 }
 

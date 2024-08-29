@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { data } from "./Data";
+import { User } from "./context/AuthProvider";
 
 export default function Signup() {
     const [name, setName] = useState("");
@@ -11,8 +12,10 @@ export default function Signup() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [dataResponse, setResponseData] = useState([]);
+    const userModel = useContext(User);
 
-    console.log(dataResponse);
+
+    console.log(userModel);
 
     const validateForm = () => {
         if (!name || !email || !phone || !pass) {
@@ -55,8 +58,12 @@ export default function Signup() {
             .then((response) => {
                 // هنغير الحلة بتاع لودينج لفولس عشان الزرار يرجع لاصله طالما العملية تمت سواء نجاح او فشل
                 setLoading(false);
-                console.log(response.data);
+                //  console.log(response.data);
                 setResponseData(response.data);
+                const token = response.data.result.token.access_token;
+                const userData = response.data.result;
+                userModel.setUserModel(userData);
+                userModel.setAuthToken(token);
 
                 setSuccess("Signup successful! Please check your email."); // ملينا الsuccess
                 // Optionally, you could redirect the user or clear the form here
