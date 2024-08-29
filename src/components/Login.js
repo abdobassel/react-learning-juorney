@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { User } from "./context/AuthProvider";
 
 export default function Login() {
+
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-
-
+    const userModel = useContext(User);
+    console.log(userModel);
     const validateForm = () => {
         if (!email || !pass) {
             setError("Please fill in all fields");
@@ -50,7 +52,10 @@ export default function Login() {
                     const token = response.data.result.token.access_token;
 
                     window.localStorage.setItem('token', token);
-                    window.location.pathname = "/";
+                    //   window.location.pathname = "/";
+                    userModel.setUserModel(response.data.result);
+                    userModel.setAuthToken(response.data.result.token.access_token);
+
                 }
 
                 // Optionally, you could redirect the user or clear the form here
